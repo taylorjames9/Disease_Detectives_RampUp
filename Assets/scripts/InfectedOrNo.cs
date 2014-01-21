@@ -13,7 +13,7 @@ public class InfectedOrNo : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		dude1 = GameObject.Find("Guest_4"); 
+		dude1 = GameObject.Find("Guest_5"); 
 		dude2 = GameObject.Find("Guest_6"); 
 		susceptibilityRemix = Time.time + 3;
 		infected = RandomBoolean ();
@@ -43,7 +43,6 @@ public class InfectedOrNo : MonoBehaviour {
 	void DudeCameUpOnMeAtAparty(){
 
 			if((Vector3.Distance(transform.position, dude1.transform.position)<2.1) && dude1.GetComponent<Cube_Party_Script>().infected){
-				//susceptibility = Random.Range (0, 6);
 					infected = true;
 					transform.renderer.material.color = Color.red; 
 					print ("Reporting: " + gameObject.name + "... Dagg y'all I gots infected by Guest_4");
