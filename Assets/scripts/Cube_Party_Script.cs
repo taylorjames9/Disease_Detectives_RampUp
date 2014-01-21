@@ -11,10 +11,7 @@ public class Cube_Party_Script : MonoBehaviour {
 	GameObject target;
 	MyState myState;
 	float boredTimer;
-	bool moving = true;
-	private float startTime;
-	private float journeyLength;
-	public float speed = 0.001F;
+	//bool moving = true;
 	bool needTarget = true;
 
 
@@ -24,84 +21,44 @@ public class Cube_Party_Script : MonoBehaviour {
 	void Start () {
 
 		myState = MyState.ChattingContent;
-
-		//print (Time.time);
 		boredTimer = Time.time + Random.Range (3, 5);
-		//print (boredTimer);
-		startTime = Time.time;
-		//journeyLength = Vector3.Distance(startMarker.position, endMarker.position);
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//print (Time.time);
-
-	
 		switch (myState) {
-
 		case MyState.ChattingContent:
-			print ("ChattingContent");
-
-			if (boredTimer < Time.time) {
+			if (boredTimer <= Time.time) {
 				boredTimer = Time.time + Random.Range (3, 10);
-				target = NPCArray [(Random.Range (0, 4))];
-				print (boredTimer);
 				myState = MyState.ImBored;
 				needTarget = true;
-
 			}
-
 			break;
 
 		case MyState.ImBored:
-			print ("I'm bored");
-			if (needTarget) {
-				target = NPCArray [(Random.Range (0, 4))];
-				needTarget = false;
-			}
-
-			transform.LookAt (target.transform);
-
-			if (Vector3.Distance (transform.position, target.transform.position) > 2) {
-				transform.position = Vector3.Lerp (transform.position, target.transform.position, 0.01f);
-				//moving = true;
-				//transform.Translate (Vector3.forward * (Time.deltaTime * 2));
-
-			}
-			//}
-			else if (Vector3.Distance (transform.position, target.transform.position) <= 2) {
-				myState = MyState.ChattingContent;
-			}
-			/*moving = false;
-
-
-			//SwitchGroup ();
-			if (!moving) {
-				myState = MyState.ChattingContent;
-			}*/
+			SwitchGroup ();
 			break;
 
 		default:
-			print ("Did not hit a state somehow");
 			break;
-
 		}
 	}
-}
-	/*void SwitchGroup(){
-		if (Vector3.Distance (transform.position, target.transform.position) > 4) {
-			transform.position = Vector3.Lerp(transform.position, target.transform.position, fracJourney);
-			moving = true;
-			//print (fracJourney);
-		} else {
-			moving = false;
+
+	void SwitchGroup(){
+		if (needTarget) {
+			target = NPCArray [(Random.Range (0, 4))];
+			needTarget = false;
 		}
 
-		//transform.position = Vector3.Lerp (transform.position, target.transform.position, 0.9f);
+		transform.LookAt (target.transform);
 
-		
-		//moving = false;
+		if (Vector3.Distance (transform.position, target.transform.position) > 2) {
+			transform.position = Vector3.Lerp (transform.position, target.transform.position, 0.01f);
+		}
+		else if (Vector3.Distance (transform.position, target.transform.position) <= 2) {
+			myState = MyState.ChattingContent;
+		}
 
-	}*/
-
+	}
+}
