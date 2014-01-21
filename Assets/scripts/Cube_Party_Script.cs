@@ -44,8 +44,8 @@ public class Cube_Party_Script : MonoBehaviour {
 			print ("ChattingContent");
 
 			if (boredTimer < Time.time) {
-				boredTimer = Time.time + Random.Range (3, 5);
-				target = NPCArray [(Random.Range (0, 5))];
+				boredTimer = Time.time + Random.Range (3, 10);
+				target = NPCArray [(Random.Range (0, 4))];
 				print (boredTimer);
 				myState = MyState.ImBored;
 				needTarget = true;
@@ -57,16 +57,16 @@ public class Cube_Party_Script : MonoBehaviour {
 		case MyState.ImBored:
 			print ("I'm bored");
 			if (needTarget) {
-				target = NPCArray [(Random.Range (0, 5))];
+				target = NPCArray [(Random.Range (0, 4))];
 				needTarget = false;
 			}
 
 			transform.LookAt (target.transform);
 
 			if (Vector3.Distance (transform.position, target.transform.position) > 2) {
-				//transform.position = Vector3.Lerp (transform.position, target.transform.position, fracJourney);
+				transform.position = Vector3.Lerp (transform.position, target.transform.position, 0.01f);
 				//moving = true;
-				transform.Translate (Vector3.forward * (Time.deltaTime * 2));
+				//transform.Translate (Vector3.forward * (Time.deltaTime * 2));
 
 			}
 			//}
