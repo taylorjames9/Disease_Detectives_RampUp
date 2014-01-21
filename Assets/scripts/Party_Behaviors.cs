@@ -4,7 +4,7 @@ using System.Collections;
 public class Party_Behaviors : MonoBehaviour {
 
 
-	enum MyState {Chatting, Moving, Bored};
+	/*enum MyState {Chatting, Moving, Bored};
 
 
 
@@ -18,7 +18,7 @@ public class Party_Behaviors : MonoBehaviour {
 
 		switch (MyState) {
 		case MyState.Chatting:
-		
+		    
 			break;
 		
 		case MyState.Bored:
@@ -27,7 +27,6 @@ public class Party_Behaviors : MonoBehaviour {
 		
 		case MyState.Moving:
 
-
 			break;
 
 
@@ -35,5 +34,5 @@ public class Party_Behaviors : MonoBehaviour {
 		}
 
 	
-	}
+	}*/
 }

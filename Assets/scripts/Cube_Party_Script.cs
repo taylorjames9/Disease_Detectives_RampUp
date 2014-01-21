@@ -4,7 +4,7 @@ using System.Collections;
 public class Cube_Party_Script : MonoBehaviour {
 
 
-	enum MyState {ChattingContent, ImBored, ConvoW_Infected};
+	enum MyState {ChattingContent, ImBored};
 
 
 	public GameObject[] NPCArray = {}; 
@@ -14,24 +14,18 @@ public class Cube_Party_Script : MonoBehaviour {
 	bool needTarget = true;
 	public bool infected;
 	public int susceptibility;
-	public Cube_Party_Script targetScript;
-	public bool imaMover;
+	public InfectedOrNo targetScript;
 
 	// Use this for initialization
 	void Start () {
-		//print (gameObject.name);
-		if (this.gameObject.name == "Guest_4" || this.gameObject.name == "Guest_6") {
-			imaMover = true;
-			//print ("I've been promoted to a mover.");
-		}
 
 		myState = MyState.ChattingContent;
 		boredTimer = Time.time + Random.Range (3, 5);
 		infected = RandomBoolean ();
-		susceptibility = Random.Range (0, 6);
+		//susceptibility = Random.Range (0, 6);
 		if (infected) {
 			transform.renderer.material.color = Color.red; 
-			print ("I'm infected");
+			print ("Reporting: "+ gameObject.name + " ... I started off infected");
 		}
 	}
 	
@@ -39,16 +33,13 @@ public class Cube_Party_Script : MonoBehaviour {
 	void Update () {
 		switch (myState) {
 		case MyState.ChattingContent:
-			if (imaMover) {
 				GettingBored ();
 				GettingInfected ();
-			} else {
-				//Dude_cameUpNow_ImInfected ();
-			}
 			break;
 
 		case MyState.ImBored:
 			SwitchGroup ();
+
 			break;
 		default:
 			break;
@@ -75,10 +66,16 @@ public class Cube_Party_Script : MonoBehaviour {
 		if (boredTimer <= Time.time) {
 			boredTimer = Time.time + Random.Range (3, 10);
 			myState = MyState.ImBored;
+			susceptibility = Random.Range (0, 6);
+			print (gameObject.name + " Susceptibility = " +susceptibility);
 			needTarget = true;
 		}
 		if (needTarget) {
-			target = NPCArray [(Random.Range (0, 4))];
+			target = NPCArray [(Random.Range (0, 3))];
+			/*while (target.GetComponent<InfectedOrNo> ().infected) {
+				target = NPCArray [(Random.Range (0, 3))];
+				print ("finding new target");
+			}*/
 			needTarget = false;
 		}
 	}
@@ -86,22 +83,13 @@ public class Cube_Party_Script : MonoBehaviour {
 	void GettingInfected(){
 
 		if (!infected){
-		targetScript = target.GetComponent<Cube_Party_Script>();
-			if (targetScript.infected && susceptibility > 0) {
+			targetScript = target.GetComponent<InfectedOrNo>();
+
+			if (targetScript.infected && susceptibility >= 4) {
 				infected = true;
-				print ("I got infected");
+				print ("Reporting: "+ gameObject.name + " ... I recently became infected");
 				transform.renderer.material.color = Color.red; 
 			}
 		}
 	}
-	
-				/*void Dude_cameUpNow_ImInfected{
-					if(Vector3.Distance(gameObject("Guest_4")<2.1 && gameObject("Guest_4"). ){
-
-					}
-	
-	}*/
-
-
-
 }
