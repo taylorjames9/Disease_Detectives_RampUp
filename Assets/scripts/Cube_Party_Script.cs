@@ -15,6 +15,7 @@ public class Cube_Party_Script : MonoBehaviour {
 	public bool infected;
 	public int susceptibility;
 	public InfectedOrNo targetScript;
+	//public Gui_Report guiScript;
 
 	// Use this for initialization
 	void Start () {
@@ -22,9 +23,8 @@ public class Cube_Party_Script : MonoBehaviour {
 		myState = MyState.ChattingContent;
 		boredTimer = Time.time + Random.Range (3, 5);
 		infected = RandomBoolean ();
-		//susceptibility = Random.Range (0, 6);
 		if (infected) {
-			transform.renderer.material.color = Color.red; 
+			//transform.renderer.material.color = Color.red; 
 			print ("Reporting: "+ gameObject.name + " ... I started off infected");
 		}
 	}
@@ -72,10 +72,6 @@ public class Cube_Party_Script : MonoBehaviour {
 		}
 		if (needTarget) {
 			target = NPCArray [(Random.Range (0, 3))];
-			/*while (target.GetComponent<InfectedOrNo> ().infected) {
-				target = NPCArray [(Random.Range (0, 3))];
-				print ("finding new target");
-			}*/
 			needTarget = false;
 		}
 	}
@@ -88,8 +84,43 @@ public class Cube_Party_Script : MonoBehaviour {
 			if (targetScript.infected && susceptibility >= 4) {
 				infected = true;
 				print ("Reporting: "+ gameObject.name + " ... I recently became infected");
-				transform.renderer.material.color = Color.red; 
+				//transform.renderer.material.color = Color.red; 
+				if (gameObject.name == "Guest_5") {
+				
+				}
+				else if (gameObject.name == "Guest_6") {
+
+				}
+
 			}
 		}
 	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

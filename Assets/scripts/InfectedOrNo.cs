@@ -18,7 +18,7 @@ public class InfectedOrNo : MonoBehaviour {
 		susceptibilityRemix = Time.time + 3;
 		infected = RandomBoolean ();
 		if (infected) {
-			transform.renderer.material.color = Color.red; 
+			//transform.renderer.material.color = Color.red; 
 			print ("Reporting: "+ gameObject.name + " .. I started off infected");
 		}
 
@@ -44,13 +44,13 @@ public class InfectedOrNo : MonoBehaviour {
 
 			if((Vector3.Distance(transform.position, dude1.transform.position)<2.1) && dude1.GetComponent<Cube_Party_Script>().infected){
 					infected = true;
-					transform.renderer.material.color = Color.red; 
+					//transform.renderer.material.color = Color.red; 
 					print ("Reporting: " + gameObject.name + "... Dagg y'all I gots infected by Guest_4");
 				}
 
 			else if((Vector3.Distance(transform.position, dude2.transform.position)<2.1) && dude2.GetComponent<Cube_Party_Script>().infected){
 					infected = true;
-					transform.renderer.material.color = Color.red; 
+					//transform.renderer.material.color = Color.red; 
 					print ("Reporting: " + gameObject.name + "... Dagg y'all I gots infected by Guest_6");
 				}
 	}
